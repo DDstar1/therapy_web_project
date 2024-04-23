@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <nav className="flex justify-between p-3 overflow-hidden">
+      <body className={`${inter.className}`}>
+        <nav className="flex justify-between p-3 overflow-hidden fixed top-0 bg-gray-300">
           <div>Logo</div>
           <div className="flex ">
             <Link className="px-5" href="/">
@@ -37,7 +37,7 @@ export default function RootLayout({
             </Link>
           </div>
         </nav>
-        {children}
+        <div className="min-h-screen mt-20">{children}</div>
       </body>
     </html>
   );

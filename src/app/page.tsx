@@ -9,7 +9,7 @@ export default function Home() {
       </div>
       <div className="">
         <button className="bg-blue-200 self-center p-3 ">
-          <Link className="w-fit" href={"/login"}>
+          <Link className="w-fit" href={"/chatbox"}>
             Contact us now
           </Link>
         </button>

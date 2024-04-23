@@ -13,7 +13,7 @@ function page() {
           <div>John John</div>
         </div>
         <div className="flex-grow relative pl-2">
-          <div className="absolute">Admin Name</div>
+          <div className="absolute text-center">Admin Name</div>
           <div className=" pt-5"></div>
 
           <div className="float-rightd">How are you</div>
