@@ -12,7 +12,7 @@ function page() {
             <div>
               <Image
                 className="rounded-full"
-                src="/dfc_logo.png"
+                src="/dfc_logo2.png"
                 alt="Example Image"
                 width={50}
                 height={50}
