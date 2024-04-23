@@ -4,8 +4,8 @@ import Image from "next/image";
 function Nav_bar() {
   return (
     <nav className="flex justify-between p-3 overflow-hidden fixed top-0 bg-gray-300 z-20 min-w-full">
-      <Image src="/dfc_logo.png" alt="Example Image" width={30} height={30} />
-      <div className="flex ">
+      <Image src="/dfc_logo2.png" alt="Example Image" width={40} height={40} />
+      <div className="flex items-center">
         <Link className="px-5" href="/">
           Welcome
         </Link>

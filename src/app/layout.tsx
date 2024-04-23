@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <Nav_bar />
-        <div className="min-h-screen mt-20">{children}</div>
+        <div className="min-h-screen mt-16">{children}</div>
       </body>
     </html>
   );
