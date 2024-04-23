@@ -14,7 +14,7 @@ function Page() {
           <input type="password" name="password" id="password" />
         </label>
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
