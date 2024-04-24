@@ -2,7 +2,7 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex fixed w-screen top-0 h-screen items-center justify-center">
       <form className="flex flex-col">
         <label htmlFor="name">
           <div className="w-20"> Name:</div>{" "}

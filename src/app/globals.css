@@ -32,7 +32,7 @@ body {
   }
 }
 
-.mine_msg {
+.their_msg {
   box-sizing: border-box;
   position: relative;
   width: fit-content;
@@ -44,7 +44,7 @@ body {
   max-width: 80%;
 }
 
-.mine_msg::before {
+.their_msg::before {
   content: "";
   position: absolute;
   top: 0;
@@ -53,8 +53,7 @@ body {
   border-width: 20px 20px 20px 0;
   border-color: transparent #f0f0f0 transparent transparent;
 }
-
-.their_msg {
+.mine_msg {
   box-sizing: border-box;
   position: relative;
   width: fit-content;
@@ -64,9 +63,10 @@ body {
   margin: 10px;
   align-self: flex-end;
   max-width: 80%;
+  margin-right: 15px;
 }
 
-.their_msg::before {
+.mine_msg::before {
   content: "";
   position: absolute;
   top: 0;

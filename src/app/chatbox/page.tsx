@@ -4,7 +4,7 @@ import Image from "next/image";
 function page() {
   return (
     <div>
-      <div className="flex">
+      <div className="flex min-h-screen">
         <div className="px-3 border-r border-gray-300">
           <div className="text-center">Admin List</div>
           <div className="sticky top-[75px]">
