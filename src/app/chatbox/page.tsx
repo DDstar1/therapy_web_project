@@ -4,26 +4,30 @@ import Image from "next/image";
 function page() {
   return (
     <div>
-      <div className="flex min-h-screen">
-        <div className="px-3 border-r border-gray-300">
-          <div className="text-center">Admin List</div>
-          <div className="sticky top-[75px]">
-            <div className="bg-gray-300 rounded-md flex items-center text-center p-2">
-              <div>John John</div>
-              <div>
-                <Image
-                  className="rounded-full"
-                  src="/dfc_logo2.png"
-                  alt="Example Image"
-                  width={50}
-                  height={50}
-                />
+      <div className="flex  min-h-screen">
+        <div className="fixed top-[48px] h-screen z-30">
+          <div className="absolute w-full h-full top-0 backdrop-blur-md"></div>
+
+          <div className="px-3 relative border-r border-gray-300 h-full">
+            <div className="text-center">Admin List</div>
+            <div className="">
+              <div className="bg-gray-300 rounded-md flex items-center text-center p-2">
+                <div>John John</div>
+                <div>
+                  <Image
+                    className="rounded-full"
+                    src="/dfc_logo2.png"
+                    alt="Example Image"
+                    width={50}
+                    height={50}
+                  />
+                </div>
               </div>
+              <div>John John</div>
+              <div>John John</div>
+              <div>John John</div>
+              <div>John John</div>
             </div>
-            <div>John John</div>
-            <div>John John</div>
-            <div>John John</div>
-            <div>John John</div>
           </div>
         </div>
         <div className="flex flex-grow flex-col relative pl-2">
