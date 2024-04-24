@@ -2,8 +2,8 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="flex fixed w-screen top-0 h-screen items-center justify-center">
-      <form className="flex flex-col">
+    <div className="flex w-screen h-screen items-center justify-center">
+      <form className="flex fixed  flex-col">
         <label htmlFor="name">
           <div className="w-20"> Name:</div>{" "}
           <input type="text" name="name" id="name" />
