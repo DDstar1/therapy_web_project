@@ -1,13 +1,12 @@
 import React from "react";
-import Image from "next/image";
+import Toggle_side_list from "@/components/Toggle_side_list";
 
 function page() {
   return (
     <div>
       <div className="flex  min-h-screen">
-        <div className="fixed top-[48px] h-screen z-30">
-          <div className="absolute w-full h-full top-0 backdrop-blur-md"></div>
-
+        {/* <div className="fixed top-[48px] h-screen z-30">
+          <Backdrop />
           <div className="px-3 relative border-r border-gray-300 h-full">
             <div className="text-center">Admin List</div>
             <div className="">
@@ -29,7 +28,8 @@ function page() {
               <div>John John</div>
             </div>
           </div>
-        </div>
+        </div> */}
+        <Toggle_side_list />
         <div className="flex flex-grow flex-col relative pl-2">
           <div className="absolute text-center w-full">Admin Name</div>
           <div className=" pt-5"></div>
