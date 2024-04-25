@@ -16,7 +16,7 @@ function Toggle_side_list() {
   };
 
   return (
-    <div className="fixed flex top-[48px] h-screen z-30">
+    <div className="fixed md:sticky flex top-[48px] h-screen z-30">
       <div
         className={`overflow-hidden transform duration-[200ms] ${
           adminOpen ? "w-full" : "w-0"
