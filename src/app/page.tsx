@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@nextui-org/button";
 
 export default function Home() {
   return (
@@ -12,11 +13,14 @@ export default function Home() {
             kvj
           </div>
 
-          <button className="bg-blue-200 self-center p-3 ">
+          <Button
+            type="submit"
+            className="my-4  self-center bg-gradient-to-tr to-yellow-200 from-yellow-500 text-black shadow-lg text-lg"
+          >
             <Link className="w-fit" href={"/chatbox"}>
               Contact us now
             </Link>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

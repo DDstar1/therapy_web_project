@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Nav_bar from "@/components/nav";
+import { NextUIProvider } from "@nextui-org/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} relative`}>
-        <Nav_bar />
-        <div className="mt-[48px] overflow-hidden">{children}</div>
+        <NextUIProvider>
+          <Nav_bar />
+          <div className="mt-[48px] overflow-hidden">{children}</div>
+        </NextUIProvider>
       </body>
     </html>
   );
