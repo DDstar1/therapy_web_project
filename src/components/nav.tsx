@@ -1,39 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MdOutlineDehaze } from "react-icons/md";
-import supabase from "@/utils/supabase";
+import supabaseClient from "@/utils/supabase/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Button, ButtonGroup } from "@nextui-org/react";
+
+import { useUser } from "@/utils/store/user";
 
 function Nav_bar() {
   const [navOpen, setnavOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
+
+  const updateUser = useUser((state) => state.updateUser);
+
+  const user = useUser((state) => state.user);
+  console.log("ascascasccsa", user);
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (user) {
-          setLoggedIn(true);
-          setUsername(user.email || ""); // You can use other user properties like 'user.username'
-        } else {
-          setLoggedIn(false);
-          setUsername(""); // You can use other user properties like 'user.username'
-        }
-      } catch (error: any) {
-        console.error("Error fetching user:", error.message);
-      }
-    };
-
-    fetchUser();
-  }, [setLoggedIn]);
 
   const toggleNavOpen = () => {
     setnavOpen(!navOpen);
@@ -44,9 +29,11 @@ function Nav_bar() {
   };
 
   const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    // router.refresh();
+    const { error } = await supabaseClient.auth.signOut();
+    updateUser(undefined);
+
     router.push("/");
+    router.refresh();
 
     if (error) {
       console.error("Error signing out:", error.message);
@@ -58,6 +45,7 @@ function Nav_bar() {
   return (
     <nav className="box-border z-40 flex justify-between p-2 overflow-hidden min-w-full fixed top-0 bg-gray-300 flex-grow">
       <Image src="/dfc_logo2.png" alt="Example Image" width={40} height={40} />
+
       <div className="flex flex-col justify-center">
         <div
           className="self-center  md:hidden cursor-pointer "
@@ -83,9 +71,9 @@ function Nav_bar() {
             Chat Box
           </Link>
 
-          {loggedIn ? (
+          {user ? (
             <>
-              <span className="px-5 py-4 md:py-0">{username}</span>
+              <span className="px-5 py-4 md:py-0">{user.email}</span>
               <div className="px-5 py-4 md:py-0">
                 <Button
                   onClick={() => {

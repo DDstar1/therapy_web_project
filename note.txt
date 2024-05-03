@@ -1,0 +1,6 @@
+npm install @supabase/ssr
+
+// router.refresh();
+      // state.setUser({ username: username, admin: admin });
+
+      DELETE FROM auth.users;

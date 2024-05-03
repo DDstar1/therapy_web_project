@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import bcrypt from "bcryptjs";
-import supabase from "@/utils/supabase";
+import supabaseClient from "@/utils/supabase/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Button, ButtonGroup } from "@nextui-org/react";
+import { useUser } from "@/utils/store/user";
+// import { UserContext } from "@/utils/context";
 
 function Page() {
   const [username, setUsername] = useState("");
@@ -12,11 +14,28 @@ function Page() {
   const [password2, setPassword2] = useState("");
   const [admin, setAdmin] = useState(false);
   const [error, setError] = useState("");
+  const [cus_user_err, set_Cus_user_err] = useState("");
+  const [loading_cus_user, set_loading_cus_user] = useState(false);
   const router = useRouter();
+
+  const updateUser = useUser((state) => state.updateUser);
 
   async function hashPassword(password: any) {
     const hashedPassword = await bcrypt.hash(password, 10);
     return hashedPassword;
+  }
+
+  const toggleAdmin = () => {
+    setAdmin(!admin);
+  };
+
+  async function fill_cusUser_db(id: any, username: any, admin: boolean) {
+    const { error }: any = await supabaseClient
+      .from("cus_user")
+      .insert({ id: id, username: username, admin: admin });
+    if (error) {
+      set_Cus_user_err(error);
+    }
   }
 
   const handleSubmit = async (e: any) => {
@@ -34,17 +53,24 @@ function Page() {
       const hashedPassword = await hashPassword(password);
 
       // Register the user with Superbase
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error } = await supabaseClient.auth.signUp({
         email: `${username}@gmail.com`, // Since Superbase requires an email, let's use a dummy email for now
-        password: hashedPassword,
+        // password: hashedPassword,
+        password: password,
       });
+
+      const userData: any = data?.user;
+
+      updateUser(userData);
+
+      fill_cusUser_db(userData.id, username, admin ? true : false);
+
+      console.log("User registered successfully:", userData);
 
       if (error) {
         throw error;
       }
 
-      console.log("User registered successfully:", username);
-      // router.refresh();
       router.push("/chatbox");
     } catch (error: any) {
       console.error("Error registering user:", error.message);
@@ -54,8 +80,16 @@ function Page() {
   return (
     <div className="flex w-screen h-screen items-center justify-center">
       <form onSubmit={handleSubmit} className="flex fixed  flex-col">
+        {/* {`vsdvs ${JSON.stringify(cus_user_err)}`} */}
         <label htmlFor="name">
-          <div className="w-20 my-2"> Name:</div>
+          <div className="flex justify-between items-center">
+            <div className="w-20 my-2">Name:</div>
+            {admin ? (
+              <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></div>
+            ) : (
+              <></>
+            )}
+          </div>
           <input
             required
             type="text"
@@ -92,15 +126,10 @@ function Page() {
           />
         </label>
 
-        <label className="fixed top-14 left-4 " htmlFor="admin">
-          <input
-            type="checkbox"
-            name="admin"
-            id="admin"
-            checked={admin}
-            onChange={(e) => setAdmin(e.target.checked)}
-          />
-        </label>
+        <div
+          className="fixed top-12 left-0 w-12 h-12"
+          onClick={toggleAdmin}
+        ></div>
 
         <Button
           type="submit"
