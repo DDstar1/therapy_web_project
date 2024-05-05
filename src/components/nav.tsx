@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { Button, ButtonGroup } from "@nextui-org/react";
 
 import { useUser } from "@/utils/store/user";
+import { cookies } from "next/headers";
+import { setCookie } from "cookies-next";
 
 function Nav_bar() {
   const [navOpen, setnavOpen] = useState(false);
@@ -31,6 +33,8 @@ function Nav_bar() {
   const handleSignOut = async () => {
     const { error } = await supabaseClient.auth.signOut();
     updateUser(undefined);
+    // cookies().set("user_id", "");
+    setCookie("user_id", undefined);
 
     router.push("/");
     router.refresh();

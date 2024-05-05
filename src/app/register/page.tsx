@@ -6,6 +6,8 @@ import supabaseClient from "@/utils/supabase/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Button, ButtonGroup } from "@nextui-org/react";
 import { useUser } from "@/utils/store/user";
+// import { cookies } from "next/headers";
+import { setCookie } from "cookies-next";
 // import { UserContext } from "@/utils/context";
 
 function Page() {
@@ -62,6 +64,7 @@ function Page() {
       const userData: any = data?.user;
 
       updateUser(userData);
+      setCookie("user_id", "authenticated");
 
       fill_cusUser_db(userData.id, username, admin ? true : false);
 

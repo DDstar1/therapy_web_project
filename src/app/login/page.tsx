@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import { useUser } from "@/utils/store/user";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { setCookie } from "cookies-next";
 
 function Page() {
   const [username, setUsername] = useState("");
@@ -19,17 +20,8 @@ function Page() {
   const handleChangeUsername = (e: any) => setUsername(e.target.value);
   const handleChangePassword = (e: any) => setPassword(e.target.value);
 
-  // async function hashPassword(password: any) {
-  //   const hashedPassword = bcrypt.compare(password, );
-  //   return hashedPassword;
-  // }
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    // Hash password before sending it to Supabase
-    // const hashedPassword = await hashPassword(password);
-    // console.log(hashedPassword);
 
     const { data, error } = await supabaseClient.auth.signInWithPassword({
       email: `${username}@gmail.com`,
@@ -42,6 +34,7 @@ function Page() {
     } else {
       console.log("Sign in successful:", data.user);
       updateUser(data.user);
+      setCookie("user_id", "authenticated");
       router.push("/chatbox");
     }
   };
