@@ -1,36 +1,21 @@
 import React from "react";
 import Toggle_side_list from "@/components/Toggle_side_list";
 import { GrSend } from "react-icons/gr";
+import supabaseClient from "@/utils/supabase/supabaseClient";
 
-function page() {
+export const revalidate = 0;
+
+async function page() {
+  // let cus_user: any = [];
+
+  const { data: cus_user, error }: any = await supabaseClient
+    .from("cus_user")
+    .select("*")
+    .eq("admin", true);
   return (
     <div>
       <div className="flex  min-h-screen">
-        {/* <div className="fixed top-[48px] h-screen z-30">
-          <Backdrop />
-          <div className="px-3 relative border-r border-gray-300 h-full">
-            <div className="text-center">Admin List</div>
-            <div className="">
-              <div className="bg-gray-300 rounded-md flex items-center text-center p-2">
-                <div>John John</div>
-                <div>
-                  <Image
-                    className="rounded-full"
-                    src="/dfc_logo2.png"
-                    alt="Example Image"
-                    width={50}
-                    height={50}
-                  />
-                </div>
-              </div>
-              <div>John John</div>
-              <div>John John</div>
-              <div>John John</div>
-              <div>John John</div>
-            </div>
-          </div>
-        </div> */}
-        <Toggle_side_list />
+        <Toggle_side_list admins={cus_user} />
         <div className="flex flex-grow flex-col justify-between">
           <div className="flex flex-col relative pl-2 w-full">
             <div className="absolute text-center w-full">Admin Name</div>
