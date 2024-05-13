@@ -64,7 +64,7 @@ function Page() {
       const userData: any = data?.user;
 
       updateUser(userData);
-      setCookie("user_id", "authenticated");
+      setCookie("user_id", `${userData.id}`);
 
       fill_cusUser_db(userData.id, username, admin ? true : false);
 

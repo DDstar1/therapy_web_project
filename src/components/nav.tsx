@@ -19,7 +19,7 @@ function Nav_bar() {
   const updateUser = useUser((state) => state.updateUser);
 
   const user = useUser((state) => state.user);
-  console.log("ascascasccsa", user);
+  console.log("ascascasccsa", user?.id);
   const router = useRouter();
 
   const toggleNavOpen = () => {

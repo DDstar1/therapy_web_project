@@ -70,7 +70,7 @@ export async function middleware(request: NextRequest) {
 
   let user_id = cookieStore.get("user_id")?.value;
 
-  if (user_id == undefined && request.url.includes("chatbox")) {
+  if (user_id == "" && request.url.includes("chatbox")) {
     return NextResponse.redirect(`${base_url}/login`);
   }
 

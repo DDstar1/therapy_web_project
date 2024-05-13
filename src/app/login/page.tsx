@@ -30,11 +30,11 @@ function Page() {
 
     if (error) {
       console.error("Sign in error:", error.message);
-      toast.error("Invalid credentials");
+      toast.error(`${error}`);
     } else {
       console.log("Sign in successful:", data.user);
       updateUser(data.user);
-      setCookie("user_id", "authenticated");
+      setCookie("user_id", `${data.user.id}`);
       router.push("/chatbox");
     }
   };

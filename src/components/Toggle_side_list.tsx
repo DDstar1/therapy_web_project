@@ -3,21 +3,37 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Backdrop from "@/components/Backdrop";
-import supabaseClient from "@/utils/supabase/supabaseClient";
+import { useReceiver, useMesssages, useUser } from "@/utils/store/user";
 
 import {
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineKeyboardDoubleArrowLeft,
 } from "react-icons/md";
+import supabaseClient from "@/utils/supabase/supabaseClient";
 
 function Toggle_side_list({ admins }: { admins: any[] }) {
   const [adminOpen, setAdminOpen] = useState(true);
+  const updateReceiver = useReceiver((state) => state.updateReceiver);
+  const receiver = useReceiver((state) => state.receiver);
+  const updateMessages = useMesssages((state) => state.updateMessages);
+  const user = useUser((state) => state.user);
 
-  console.log();
+  console.log("chatlist_user", user);
 
   const toggleAdminList = () => {
     setAdminOpen(!adminOpen);
     console.log("dsdsd", admins);
+  };
+
+  const getMessages = async () => {
+    const { data: message_list, error: error2 }: any = await supabaseClient
+      .from("Messages")
+      .select("*")
+      .eq("sender_id", user?.id)
+      .eq("receiver_id", receiver);
+    console.log("message_list", message_list);
+    console.log("error2", error2);
+    updateMessages(message_list);
   };
 
   return (
@@ -35,6 +51,10 @@ function Toggle_side_list({ admins }: { admins: any[] }) {
               <div
                 key={index}
                 className="bg-gray-300 rounded-md flex items-center justify-between text-center p-2 my-2"
+                onClick={() => {
+                  updateReceiver(admin.id);
+                  getMessages();
+                }}
               >
                 <div>{admin.username}</div>
                 <div>

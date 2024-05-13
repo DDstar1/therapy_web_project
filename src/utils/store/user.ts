@@ -7,6 +7,10 @@ interface userState {
   updateUser: (user: any) => void;
 }
 
+interface receiverState {
+  receiver: string | undefined;
+  updateReceiver: (receiver: any) => void;
+}
 // export const useUser = create<userState>()(
 //   (set) => ({
 //     user: undefined,
@@ -29,3 +33,13 @@ export const useUser = create<userState>()(
     }
   )
 );
+
+export const useReceiver = create<receiverState>()((set) => ({
+  receiver: undefined,
+  updateReceiver: (receiver) => set(() => ({ receiver: receiver })),
+}));
+
+export const useMesssages = create<any>()((set) => ({
+  message_list: [],
+  updateMessages: (list: any) => set(() => ({ message_list: list })),
+}));
